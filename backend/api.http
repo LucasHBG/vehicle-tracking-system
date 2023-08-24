@@ -1,0 +1,15 @@
+### Get all routes
+GET http://localhost:3000/v1/api/routes
+
+### Get one route
+GET http://localhost:3000/v1/api/routes/1
+
+### Create a new route
+POST http://localhost:3000/v1/api/routes
+Content-Type: application/json
+
+{
+    "name": "route test 1",
+    "source_id": "1",
+    "destination_id": "2"
+}
