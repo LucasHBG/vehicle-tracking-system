@@ -10,9 +10,12 @@ Content-Type: application/json
 
 {
     "name": "route test 1",
-    "source_id": "1",
-    "destination_id": "2"
+    "source_id": "EkZBdi4gR292LiBWYWxhZGFyZXMsIDEwMDAgLSBTYW50byBBZm9uc28sIEJldGltIC0gTUcsIDMyNjIzLTU3NSwgQnJhc2lsIjESLwoUChIJja7gMwfdpgARgN9V_RFivpEQ6AcqFAoSCfmsiD4H3aYAEdRlj37c-uzz",
+    "destination_id": "EkZBdi4gR292LiBWYWxhZGFyZXMsIDEwMzAgLSBTYW50byBBZm9uc28sIEJldGltIC0gTUcsIDMyNjIzLTY5MCwgQnJhc2lsIjESLwoUChIJTbH1swDdpgARYOtQ1DjwovIQhggqFAoSCfmsiD4H3aYAEdRlj37c-uzz"
 }
 
 ### Get route from text
 GET http://localhost:3000/v1/api/places?text=rua general cunha matos qd 23 lt 06, vila maua
+
+### Get directions between two points
+GET http://localhost:3000/v1/api/directions?originId=EkZBdi4gR292LiBWYWxhZGFyZXMsIDEwMDAgLSBTYW50byBBZm9uc28sIEJldGltIC0gTUcsIDMyNjIzLTU3NSwgQnJhc2lsIjESLwoUChIJja7gMwfdpgARgN9V_RFivpEQ6AcqFAoSCfmsiD4H3aYAEdRlj37c-uzz&destinationId=EkZBdi4gR292LiBWYWxhZGFyZXMsIDEwMzAgLSBTYW50byBBZm9uc28sIEJldGltIC0gTUcsIDMyNjIzLTY5MCwgQnJhc2lsIjESLwoUChIJTbH1swDdpgARYOtQ1DjwovIQhggqFAoSCfmsiD4H3aYAEdRlj37c-uzz
