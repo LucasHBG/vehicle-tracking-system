@@ -13,3 +13,6 @@ Content-Type: application/json
     "source_id": "1",
     "destination_id": "2"
 }
+
+### Get route from text
+GET http://localhost:3000/v1/api/places?text=rua general cunha matos qd 23 lt 06, vila maua
