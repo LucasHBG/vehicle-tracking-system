@@ -1,7 +1,8 @@
-## Installation
+## First steps to run the project
 
 ```bash
 $ npm install
+$ npx prisma generate
 ```
 
 ## Running the app
