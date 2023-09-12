@@ -7,3 +7,4 @@ Technologies and tools used:
 - Rest
 - Google Maps API
 - Kafka
+- Next.js
