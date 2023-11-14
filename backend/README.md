@@ -2,7 +2,7 @@
 
 ```bash
 $ npm install
-$ npx prisma generate
+$ npx prisma@[your.project.version] generate
 ```
 
 ## Running the app
