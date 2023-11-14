@@ -1,7 +1,23 @@
-FROM node:20-slim
+FROM node:20-alpine3.17 AS dev
 
-WORKDIR /home/node/app
+# Instala o git
+RUN apk --update --no-cache add git openssh
 
-USER node
+# Importa as configurações do Git
+RUN git config --global safe.directory '*'
 
-CMD ["tail", "-f", "/dev/null"]
+# Cria um diretório de trabalho
+WORKDIR /usr/app
+
+COPY . .
+
+# Copiar env.example para .env
+COPY [".env.example", ".env"]
+
+# Instala as dependências do projeto 
+RUN npm ci && npm cache clean --force
+
+# Exposição da porta
+EXPOSE 3000
+
+CMD ["npm", "run", "dev"]
