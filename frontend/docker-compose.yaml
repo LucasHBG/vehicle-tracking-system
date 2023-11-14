@@ -1,12 +1,19 @@
-version: "3"
+version: "3.9"
 
 services:
     app:
-        build: .
+        build:
+            context: .
+            dockerfile: Dockerfile
+            target: dev
+        container_name: app
+        restart: unless-stopped
         ports:
             - "3001:3000"
         volumes:
-            - .:/home/node/app
+            - .:/usr/app/
+            - /usr/app/node_modules/
+            - /usr/app/.next/
 
         # if you need to stop the containers run:
         # docker compose down --volumes
