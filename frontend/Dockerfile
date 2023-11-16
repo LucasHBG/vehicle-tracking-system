@@ -18,6 +18,6 @@ COPY [".env.example", ".env"]
 RUN npm ci && npm cache clean --force
 
 # Exposição da porta
-EXPOSE 3000
+EXPOSE 3001
 
 CMD ["npm", "run", "dev"]
