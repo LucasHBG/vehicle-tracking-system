@@ -25,8 +25,12 @@ export function NewRoute() {
         if (source == (null || "") || destination == (null || "")) return;
 
         const [sourceResponse, destinationResponse] = await Promise.all([
-            fetch(`http://localhost:3000/v1/api/places/?text=${source}`),
-            fetch(`http://localhost:3000/v1/api/places/?text=${destination}`),
+            fetch(
+                `${process.env.NEXT_PUBLIC_NEXT_API_URL}/places/?text=${source}`
+            ),
+            fetch(
+                `${process.env.NEXT_PUBLIC_NEXT_API_URL}/places/?text=${destination}`
+            ),
         ]);
 
         const [sourcePlace, destinationPlace]: FindPlaceFromTextResponseData[] =
@@ -50,7 +54,7 @@ export function NewRoute() {
         const destinationPlaceId = destinationPlace.candidates[0].place_id;
 
         const directionsResponse = await fetch(
-            `http://localhost:3000/v1/api/directions?originId=${sourcePlaceId}&destinationId=${destinationPlaceId}`
+            `${process.env.NEXT_PUBLIC_NEXT_API_URL}/directions?originId=${sourcePlaceId}&destinationId=${destinationPlaceId}`
         );
 
         const directionsData: DirectionsResponseData & { request: any } =
@@ -77,17 +81,21 @@ export function NewRoute() {
         const startAddress = directionsData!.routes[0].legs[0].start_address;
         const endAddress = directionsData!.routes[0].legs[0].end_address;
 
-        const response = await fetch("http://localhost:3000/v1/api/routes", {
-            method: "POST",
-            headers: {
-                "Content-Type": "application/json",
-            },
-            body: JSON.stringify({
-                name: `${startAddress} - ${endAddress}`,
-                source_id: directionsData!.request.origin.place_id,
-                destination_id: directionsData!.request.destination.place_id,
-            }),
-        });
+        const response = await fetch(
+            `${process.env.NEXT_PUBLIC_NEXT_API_URL}/routes`,
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({
+                    name: `${startAddress} - ${endAddress}`,
+                    source_id: directionsData!.request.origin.place_id,
+                    destination_id:
+                        directionsData!.request.destination.place_id,
+                }),
+            }
+        );
 
         const route = await response.json();
     }
@@ -125,15 +133,28 @@ export function NewRoute() {
                     <div className="p-4">
                         <ul>
                             <li>
-                                Origin:{" "}
+                                <h3> Origin: </h3>
                                 {directionsData.routes[0].legs[0].start_address}
                             </li>
                             <li>
-                                Destiny:{" "}
+                                <h3> Destiny: </h3>
                                 {directionsData.routes[0].legs[0].end_address}
                             </li>
                             <li>
-                                <button className="text-lg rounded py-1 px-2 text-black bg-slate-100" onClick={createRoute}>Create route</button>
+                                <h3> Distância: </h3>
+                                {directionsData.routes[0].legs[0].distance.text}
+                            </li>
+                            <li>
+                                <h3> Tempo de viagem: </h3>
+                                {directionsData.routes[0].legs[0].duration.text}
+                            </li>
+                            <li>
+                                <button
+                                    className="text-lg rounded py-1 px-2 text-black bg-slate-100"
+                                    onClick={createRoute}
+                                >
+                                    Create route
+                                </button>
                             </li>
                         </ul>
                     </div>
